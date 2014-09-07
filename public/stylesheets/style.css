@@ -1,0 +1,44 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.bodyContent{
+    margin-top: 50px;
+}
+.leftSpan{
+    float: right;
+}
+/*----------------Header---------------*/
+.logo{
+    width: auto;
+    height: 50px;
+}
+.myHeader{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+
+/*-----------------List Room--------------------*/
+.roomItem{
+    margin: 5px 15px;
+    width: 250px;
+    float: left;
+    cursor: pointer;
+}
+.addRoomBtn{
+    width: auto;
+    height: 20px;
+    margin-bottom: 5px;
+    padding-right: 5px;
+}
+
+/*------------------------Room Detail------------------------*/
+.mycontent-left {
+    border-right: 1px dashed #333;
+    padding-right: 20px;
+}

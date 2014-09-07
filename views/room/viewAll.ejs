@@ -1,0 +1,74 @@
+<fieldset>
+    <legend>
+        <span>Rooms</span>
+        <span class="leftSpan">
+            <a href="#" data-toggle="modal" data-target="#CreateRoomModal"><img src="/images/add.png" class="addRoomBtn"></a>
+        </span>
+    </legend>
+</fieldset>
+<% if(rooms && rooms.length > 0){%>
+    <% for(var i = 0; i < rooms.length; i++){%>
+        <div class="roomItem" ng-click="joinRoom(<%= rooms[i]._id %>)">
+            <% if(rooms[i].status){ %>
+                <div class="panel panel-info">
+            <% }else{ %>
+                <div class="panel panel-danger">
+            <% } %>
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span><%= i+1 %></span>
+                        <span><%= rooms[i].name %></span>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li><%= rooms[i].description %></li>
+                        <li><%= rooms[i].host %></li>
+                        <li><%= rooms[i].createTime %></li>
+                        <% if(rooms[i].player){ %>
+                            <li><%= rooms[i].player %></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <% } %>
+<% }else{ %>
+    <h5>No Room. Create new room and enjoy ^^</h5>
+<% } %>
+
+<!-- Create Room Modal -->
+<div class="modal fade" id="CreateRoomModal" tabindex="-1" role="dialog" aria-labelledby="CreateRoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/game/createRoom">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Create new room</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nameInput">Name:</label>
+                        <input type="text" name="name" class="form-control" id="nameInput" placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">Password:</label>
+                        <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">Description:</label>
+                        <textarea name="description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameInput">Invite friend:</label>
+                        <input type="text" name="friend" class="form-control" id="friendInput" placeholder="Enter friend">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
