@@ -34,7 +34,7 @@ app.use(session({
 }));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://ga12ru12:quang123@ds059509.mongolab.com:59509/binhmuc');
+mongoose.connect('mongodb://ga12ru12:quang123@ds059509.mongolab.com:59509/plant_fighting');
 
 app.all("*", function(req, res, next) {
     res.locals.urlRequest = req.url;

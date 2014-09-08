@@ -1,7 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user').User;
-var crypto          = require('crypto');
+var express     = require('express');
+var router      = express.Router();
+var crypto      = require('crypto');
+var async       = require('async');
+
+var User        = require('../models/user').User;
+
+
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -20,7 +24,6 @@ router.post('/login', function(req, res) {
                 req.session.err = 'Username and password wrong. Please try again!';
                 res.redirect('/login');
             }else{
-                console.log(user);
                 req.session.user = user;
                 req.session.success = 'Login successfully. GLHF!!!!';
                 res.redirect('/game');
@@ -30,6 +33,35 @@ router.post('/login', function(req, res) {
             res.redirect('/login');
         }
     });
+});
+
+router.get('/signup', function(req, res){
+    res.render('signup');
+});
+
+router.post('/signup', function(req, res){
+    if(req.body.username && req.body.email && req.body.password){
+        async.parallel([
+            function(cb){
+                new User().checkUserNameExist(req.body.username, function(status){
+                    cb(null, status);
+                });
+            }, function(cb){
+                new User().checkEmailExist(req.body.email, function(status){
+                    cb(null, status);
+                });
+            }
+        ], function(err, result){
+            if(result.indexOf(-1)){
+                req.session.err = ""
+            }else{
+
+            }
+        });
+    }else{
+        res.session.err = "Please fill out the Signup form";
+        res.redirect('/signup');
+    }
 });
 
 module.exports = router;

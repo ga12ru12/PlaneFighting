@@ -58,6 +58,30 @@ User.prototype = {
                 }
             }
         });
+    },
+    checkUserNameExist: function(username, callback){
+        var self = this;
+        UserModel.findOne({username: username}, function(err, result){
+            if(err){
+                console.log('checkUserNameExist fail: username-'+username);
+                console.log(err);
+                return callback(-1);
+            }else{
+                return callback((result ? 1:0));
+            }
+        });
+    },
+    checkEmailExist: function(email, callback){
+        var self = this;
+        UserModel.findOne({email: email}, function(err, result){
+            if(err){
+                console.log('checkEmailExist fail: email-'+email);
+                console.log(err);
+                return callback(-1);
+            }else{
+                return callback((result ? 1:0));
+            }
+        });
     }
 }
 
