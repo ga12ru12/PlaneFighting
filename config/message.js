@@ -4,7 +4,9 @@
 var messages = {
     dbErr               : 'Database have error. Please try later!',
     loginSuccess        : 'Login successfully. GLHF!!!!',
-    loginFail           : 'Username and password wrong. Please try again!'
+    loginFail           : 'Username and password wrong. Please try again!',
+    fillOutSignup       : 'Please fill out the Signup form',
+    existSignUp         : ''
 }
 
 module.exports = messages;

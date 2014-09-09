@@ -1,10 +1,10 @@
-var express     = require('express');
-var router      = express.Router();
-var crypto      = require('crypto');
-var async       = require('async');
+var express         = require('express');
+var router          = express.Router();
+var crypto          = require('crypto');
+var async           = require('async');
 
-var User        = require('../models/user').User;
-
+var User            = require('../models/user').User;
+var serverMessage   = require('../config/message');
 
 
 /* GET home page. */
@@ -21,15 +21,15 @@ router.post('/login', function(req, res) {
     user.checkUserLogin(req.body.username, crypto.createHash('sha1').update(req.body.password).digest('hex'), function(status, err){
         if(status){
             if(err){
-                req.session.err = 'Username and password wrong. Please try again!';
+                req.session.err = serverMessage.loginFail;
                 res.redirect('/login');
             }else{
                 req.session.user = user;
-                req.session.success = 'Login successfully. GLHF!!!!';
-                res.redirect('/game');
+                req.session.success = serverMessage.loginSuccess;
+                res.redirect(res.locals.urlRequest ? res.locals.urlRequest:'/login');
             }
         }else{
-            req.session.err = 'Database have error. Please try later!';
+            req.session.err = serverMessage.dbErr;
             res.redirect('/login');
         }
     });
@@ -53,13 +53,14 @@ router.post('/signup', function(req, res){
             }
         ], function(err, result){
             if(result.indexOf(-1)){
-                req.session.err = ""
-            }else{
-
+                req.session.err = serverMessage.dbErr;
+                res.redirect('/signup');
+            }else if(result.indexOf(1)){
+                req.session.err = "Username or email exits";
             }
         });
     }else{
-        res.session.err = "Please fill out the Signup form";
+        res.session.err = serverMessage.fillOutSignup;
         res.redirect('/signup');
     }
 });

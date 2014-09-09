@@ -57,6 +57,7 @@ app.all("*", function(req, res, next) {
 });
 
 app.all('/game/*', function(req, res, next){
+    res.locals.urlRequest = req.url;
     if(!req.session.user){
         res.redirect('/login');
     }else{
