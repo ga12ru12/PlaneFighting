@@ -26,7 +26,7 @@ router.post('/login', function(req, res) {
             }else{
                 req.session.user = user;
                 req.session.success = serverMessage.loginSuccess;
-                res.redirect(res.locals.urlRequest ? res.locals.urlRequest:'/login');
+                res.redirect(res.locals.urlRequest === '/login' ? '/game':res.locals.urlRequest );
             }
         }else{
             req.session.err = serverMessage.dbErr;
@@ -56,7 +56,11 @@ router.post('/signup', function(req, res){
                 req.session.err = serverMessage.dbErr;
                 res.redirect('/signup');
             }else if(result.indexOf(1)){
-                req.session.err = "Username or email exits";
+                req.session.err = serverMessage.existSignUp;
+                res.redirect('/signup');
+            }else{
+                res.session.success = serverMessage.successSignup
+                res.redirect('/login');
             }
         });
     }else{

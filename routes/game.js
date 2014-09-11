@@ -35,7 +35,6 @@ router.get('/room', function(req, res){
     var id = req.param('id');
     var room = new Room();
     room.getRoomById(id, function(){
-        console.log(room);
         res.render('index', {room: room});
     });
 });

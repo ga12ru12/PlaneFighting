@@ -8,6 +8,20 @@
 </ul>
 <div>Room Description: <%= room.description%></div>
 <div>Room Id: <%= room._id %></div>
-<div>
-    {{ a }}
+<div class="gameBoard">
+    <div class="span6 myBoard theBoard" ng-repeat="c in columes">
+        <div  ng-repeat="r in rows">
+            <div class="square" ng-click="updateMyBoard(c,r)"></div>
+        </div>
+    </div>
+    <div class="span6 enemyBoard theBoard" ng-repeat="c in columes">
+        <div  ng-repeat="r in rows">
+            <div class="square" ng-click="updateEnemyBoard(c,r)"></div>
+        </div>
+    </div>
 </div>
+
+<script>
+    var rows = <%= rows ? rows : 10%>;
+    var columes = <%= columes ? columes : 10%>;
+</script>

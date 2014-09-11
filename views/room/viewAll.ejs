@@ -8,7 +8,8 @@
 </fieldset>
 <% if(rooms && rooms.length > 0){%>
     <% for(var i = 0; i < rooms.length; i++){%>
-        <div class="roomItem" ng-click="joinRoom(<%= rooms[i]._id %>)">
+        <div class="roomItem">
+            <input type="hidden" value="<%= rooms[i]._id %>">
             <% if(rooms[i].status){ %>
                 <div class="panel panel-info">
             <% }else{ %>
@@ -60,6 +61,18 @@
                         <textarea name="description" class="form-control" rows="3"></textarea>
                     </div>
                     <div class="form-group">
+                        <label for="nameInput">Size of board:</label>
+                        <div class="col-xs-3">
+                            <div class="col-xs-1">
+                                <input type="text" class="form-control" placeholder="Number of rows" name="rows">
+                            </div>
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <div class="col-xs-1">
+                                <input type="text" class="form-control" placeholder="Number of columes" name="columes">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="nameInput">Invite friend:</label>
                         <input type="text" name="friend" class="form-control" id="friendInput" placeholder="Enter friend">
                     </div>
@@ -72,3 +85,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(function(){
+        $('.roomItem').click(function(){
+            window.location = '/game/room?id='+$(this).find('input').val();
+        });
+    });
+</script>

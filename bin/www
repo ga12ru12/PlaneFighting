@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 var debug = require('debug')('generated-express-app');
+var https = require('https');
 var app = require('../app');
 
 app.set('port', process.env.PORT || 3000);
 
-var server = app.listen(app.get('port'), function() {
-    console.log('Express server listening on port ' + server.address().port);
+var serverHTTP = app.listen(app.get('port'), function() {
+    console.log('Express server HTTP listening on port ' + serverHTTP.address().port);
 });
+//var credentials = {key: '123', cert: 'abc'},
+//    serverHTTPS = https.createServer(credentials, app);
+//serverHTTPS.listen(8443, function(){
+//    console.log('Express server HTTPS listening on port ' + 8443);
+//});

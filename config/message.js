@@ -6,7 +6,8 @@ var messages = {
     loginSuccess        : 'Login successfully. GLHF!!!!',
     loginFail           : 'Username and password wrong. Please try again!',
     fillOutSignup       : 'Please fill out the Signup form',
-    existSignUp         : ''
+    existSignUp         : 'Username or email exits',
+    successSignup       : 'Sign up is successfully'
 }
 
 module.exports = messages;
